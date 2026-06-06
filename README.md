@@ -102,6 +102,36 @@ The frontend should now run at:
 
 `http://localhost:5173`
 
+## Fast setup on another machine
+
+If you want to clone the repo and use it with almost no manual project changes:
+
+1. Clone the repo
+2. Copy your real `backend/.env` from your main machine into the cloned project
+3. Run the setup script
+
+```powershell
+git clone https://github.com/vishwajith2000/Threat-Detection-Dashboard.git
+cd Threat-Detection-Dashboard
+.\setup-office.ps1
+```
+
+Then use these two commands in separate terminals:
+
+```powershell
+.\start-backend.ps1
+```
+
+```powershell
+.\start-frontend.ps1
+```
+
+Why you still need to copy `backend/.env`:
+
+- the repository is public
+- real API keys should never be pushed into public GitHub
+- your real `.env` stays only on machines you trust
+
 ## How to use the app
 
 1. Open `http://localhost:5173`
