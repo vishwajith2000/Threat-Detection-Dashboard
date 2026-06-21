@@ -1,5 +1,10 @@
 # Starts the Django backend from the project root.
 
+param(
+    [string]$Host = "127.0.0.1",
+    [int]$Port = 8000
+)
+
 $ErrorActionPreference = "Stop"
 
 if (-not (Test-Path ".\backend\.env")) {
@@ -8,5 +13,5 @@ if (-not (Test-Path ".\backend\.env")) {
     exit 1
 }
 
-Write-Host "Starting Django backend on http://127.0.0.1:8000" -ForegroundColor Cyan
-.\backend\venv\Scripts\python.exe .\backend\manage.py runserver
+Write-Host "Starting Django backend on http://${Host}:${Port}" -ForegroundColor Cyan
+.\backend\venv\Scripts\python.exe .\backend\manage.py runserver "${Host}:${Port}"

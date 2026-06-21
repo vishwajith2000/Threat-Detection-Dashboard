@@ -132,6 +132,45 @@ Why you still need to copy `backend/.env`:
 - real API keys should never be pushed into public GitHub
 - your real `.env` stays only on machines you trust
 
+## Let another computer open the dashboard from your VM
+
+If you want the app to run on the VM and be opened from another computer on your network:
+
+1. Find the VM IP address
+2. Add that VM IP to `backend/.env`
+3. Start backend and frontend on `0.0.0.0`
+4. Open the VM firewall / cloud security rules for ports `8000` and `5173`
+
+Example `backend/.env` values:
+
+```env
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,192.168.1.50
+CORS_ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://192.168.1.50:5173
+```
+
+Start the servers like this:
+
+```powershell
+.\start-backend.ps1 -Host 0.0.0.0 -Port 8000
+```
+
+```powershell
+.\start-frontend.ps1 -Host 0.0.0.0 -Port 5173
+```
+
+Then another computer can open:
+
+```text
+http://YOUR-VM-IP:5173
+```
+
+Important:
+
+- `127.0.0.1` means "only this machine"
+- `0.0.0.0` means "listen on the VM network"
+- this is good for testing inside your office or network
+- for real production hosting, use a proper web server later
+
 ## How to use the app
 
 1. Open `http://localhost:5173`

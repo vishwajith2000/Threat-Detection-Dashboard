@@ -1,8 +1,13 @@
 # Starts the React frontend from the project root.
 
+param(
+    [string]$Host = "127.0.0.1",
+    [int]$Port = 5173
+)
+
 $ErrorActionPreference = "Stop"
 
-Write-Host "Starting frontend on http://127.0.0.1:5173" -ForegroundColor Cyan
+Write-Host "Starting frontend on http://${Host}:${Port}" -ForegroundColor Cyan
 Push-Location .\frontend
-npm.cmd run dev -- --host 127.0.0.1
+npm.cmd run dev -- --host $Host --port $Port
 Pop-Location
